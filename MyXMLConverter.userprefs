@@ -1,28 +1,15 @@
-﻿<Properties>
+﻿<Properties GitUserInfo="UsingMD">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="UnipayFormMaker/Factories/FormFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="UnipayFormMaker\MainWindow.cs">
     <Files>
-      <File FileName="UnipayFormMaker/Main.cs" Line="16" Column="1" />
-      <File FileName="UnipayFormMaker/Models/FormModel.cs" Line="11" Column="2" />
-      <File FileName="UnipayFormMaker/Controllers/FormController.cs" Line="33" Column="11" />
-      <File FileName="UnipayFormMaker/Controllers/MainController.cs" Line="75" Column="4" />
-      <File FileName="UnipayFormMaker/Factories/FormFactory.cs" Line="212" Column="23" />
-      <File FileName="UnipayFormMaker/Utilities/TextFileReader.cs" Line="10" Column="24" />
-      <File FileName="UnipayFormMaker/MainWindow.cs" Line="125" Column="1" />
-      <File FileName="UnipayFormMaker/Utilities/FileWriter.cs" Line="35" Column="52" />
-      <File FileName="UnipayFormMaker/Models/Fields.cs" Line="12" Column="35" />
-      <File FileName="UnipayFormMaker/Models/Page.cs" Line="23" Column="4" />
-      <File FileName="UnipayFormMaker/Models/PaymentType.cs" Line="5" Column="39" />
-      <File FileName="UnipayFormMaker/Controllers/FieldsController.cs" Line="3" Column="29" />
-      <File FileName="UnipayFormMaker/FieldsDialog.cs" Line="1" Column="1" />
-      <File FileName="UnipayFormMaker/FormDialog.cs" Line="17" Column="25" />
+      <File FileName="UnipayFormMaker\MainWindow.cs" Line="38" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True">
+        <State expanded="True">
           <Option id="ShowVersionControlOverlays" value="False" />
           <Node name="UnipayFormMaker" expanded="True">
-            <Node name="Controllers" expanded="True" />
+            <Node name="References" expanded="True" />
             <Node name="Factories" expanded="True" />
             <Node name="Models" expanded="True" />
             <Node name="Utilities" expanded="True" />

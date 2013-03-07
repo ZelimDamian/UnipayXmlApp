@@ -20,16 +20,24 @@ public partial class MainWindow: Gtk.Window
 		public string FormName {get { return formName; } }
 	}
 
+	Gtk.TreeModelFilter filter;
+
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
 		nodeview1.NodeSelection.Changed += new System.EventHandler (OnSelectionChanged);
-		nodeview1.ButtonPressEvent += delegate(object o, ButtonPressEventArgs args) {
-			Console.WriteLine("HELLLOOOOO");
-		};
+
 		sourseTextView.Buffer.Changed += delegate(object sender, EventArgs e) {
 			this.sourceHolder = sourseTextView.Buffer.Text;
 		};
+
+		searchEntry.Changed += OnFilterEntryTextChanged;
+	}
+
+	void OnFilterEntryTextChanged (object o, System.EventArgs args)
+	{
+		// Since the filter text changed, tell the filter to re-determine which rows to display
+		filter.Refilter ();
 	}
 
 	void OnSelectionChanged (object o, System.EventArgs args)
@@ -68,10 +76,27 @@ public partial class MainWindow: Gtk.Window
 		{ 
 			MyTreeNode node = new MyTreeNode(str);
 			nodeView.NodeStore.AddNode(node);
-		} 
+		}
+
+		filter = new TreeModelFilter (nodeView.Model, null);
+        filter.VisibleFunc = new Gtk.TreeModelFilterVisibleFunc(FilterTree);
+        nodeview1.Model = filter;
 	}
 
 	String sourceHolder = "";
+
+    private bool FilterTree(Gtk.TreeModel model, Gtk.TreeIter iter)
+    {
+        string name = model.GetValue(iter, 0).ToString();
+
+        if (searchEntry.Text == "")
+            return true;
+
+        if (name.IndexOf(searchEntry.Text) > -1)
+            return true;
+        else
+            return false;
+    }
 
 	public String SourceText
 	{

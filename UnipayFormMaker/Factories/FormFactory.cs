@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnipayFormMaker.Fields;
 using System.Xml;
-using System.Data.Linq;
 
 namespace UnipayFormMaker
 {
@@ -191,7 +190,8 @@ namespace UnipayFormMaker
 			Pages.Page page = new Pages.Page();
 
 			MatchCollection fieldMatches = Regex.Matches(pageStr, "<field[\\s.*?]*?type=\"input\"(.+?)/?>(.*?</field>)?");
-			
+			int fieldCounter = 0;
+
 			foreach(Match match in fieldMatches)
 			{
 				String value = match.Groups[0].Value;
@@ -207,15 +207,17 @@ namespace UnipayFormMaker
 				XmlNode node = doc.SelectSingleNode(@"/field");
 
 				if(node != null && node.Attributes.Count > 2)
-					page.Fields.Add(ConstructDisplaySchemeField(node));
+					page.Fields.Add(ConstructDisplaySchemeField(node, fieldCounter++));
 			}
 			
 			return page;
 		}
 
-		protected Field ConstructDisplaySchemeField(XmlNode node)
+		protected Field ConstructDisplaySchemeField(XmlNode node, int fieldNum)
 		{
 			Field field = new Field();
+
+			field.Name = "id" + (fieldNum + 2).ToString();
 
 			XmlAttribute keyboard = node.Attributes["keyboard"];
 			if(keyboard != null && keyboard.Value.Length != 0)

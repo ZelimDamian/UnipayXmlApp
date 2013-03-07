@@ -65,7 +65,7 @@ namespace UnipayFormMaker
 				name = value;
 			}
 		}
-
+        
 		public String GenerateXMLString()
 		{
 			StringBuilder result = new StringBuilder();
@@ -94,6 +94,8 @@ namespace UnipayFormMaker
 			}
 
 			writer.WriteEndElement();
+
+            writer.Flush();
 
 			return result.ToString();
 		}

@@ -10,6 +10,10 @@ namespace Stetic
 		{
 			if ((Stetic.Gui.initialized == false)) {
 				Stetic.Gui.initialized = true;
+				global::Gtk.IconFactory w1 = new global::Gtk.IconFactory ();
+				global::Gtk.IconSet w2 = new global::Gtk.IconSet (global::Stetic.IconLoader.LoadIcon (iconRenderer, "gtk-convert", global::Gtk.IconSize.Menu));
+				w1.Add ("convertIcon", w2);
+				w1.AddDefault ();
 			}
 		}
 	}
@@ -24,7 +28,7 @@ namespace Stetic
 			} else {
 				int sz;
 				int sy;
-				global::Gtk.Icon.SizeLookup (size, out  sz, out  sy);
+				global::Gtk.Icon.SizeLookup (size, out sz, out sy);
 				try {
 					return Gtk.IconTheme.Default.LoadIcon (name, sz, 0);
 				} catch (System.Exception) {
@@ -39,8 +43,12 @@ namespace Stetic
 						pmap.DrawRectangle (gc, false, 0, 0, (sz - 1), (sz - 1));
 						gc.SetLineAttributes (3, Gdk.LineStyle.Solid, Gdk.CapStyle.Round, Gdk.JoinStyle.Round);
 						gc.RgbFgColor = new Gdk.Color (255, 0, 0);
-						pmap.DrawLine (gc, (sz / 4), (sz / 4), ((sz - 1) - (sz / 4)), ((sz - 1) - (sz / 4)));
-						pmap.DrawLine (gc, ((sz - 1) - (sz / 4)), (sz / 4), (sz / 4), ((sz - 1) - (sz / 4)));
+						pmap.DrawLine (gc, (sz / 4), (sz / 4), ((sz - 1) 
+							- (sz / 4)), ((sz - 1) 
+							- (sz / 4)));
+						pmap.DrawLine (gc, ((sz - 1) 
+							- (sz / 4)), (sz / 4), (sz / 4), ((sz - 1) 
+							- (sz / 4)));
 						return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, sz, sz);
 					}
 				}
