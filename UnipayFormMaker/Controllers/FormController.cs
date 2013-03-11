@@ -36,7 +36,7 @@ namespace UnipayFormMaker
 
 		public void UpdateView()
 		{
-			dialog.UpdateFieldList(Model.GetFieldsAsObjects());
+			dialog.UpdatePageList(Model.GetPagesNumList());
 
 			dialog.FormId = Model.Id.ToString();
 			dialog.FormName = Model.Name;

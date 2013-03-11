@@ -22,7 +22,7 @@ namespace UnipayFormMaker
 			FieldsController.GetInstance().ShowDialog();
 		}
 		
-		protected void OnDigitalFieldButtonClicked (object sender, EventArgs e)
+		protected void OnDigitalPageButtonClicked (object sender, EventArgs e)
 		{
 			throw new System.NotImplementedException ();
 		}
@@ -47,23 +47,20 @@ namespace UnipayFormMaker
 			get { return this.resultText.Buffer.Text ; }
 		}
 		
-		public List<String> TextFields
+	
+		
+		public void UpdatePageList(List<String> PageList)
 		{
-			get { return new List<string>(); }
+			if(PageList.Count != 0)
+				ComboBoxPopulate(this.textFieldListCombo, PageList);
 		}
 		
-		public void UpdateFieldList(List<object[]> fieldList)
-		{
-			if(fieldList.Count != 0)
-				ComboBoxPopulate(this.textFieldListCombo, fieldList);
-		}
-		
-		public void RemoveAllFromFieldsCombo()
+		public void RemoveAllFromPagesCombo()
 		{
 			this.textFieldListCombo.Clear ();
 		}
 		
-		public String GetSelectedTextField(int index)
+		public String GetSelectedTextPage(int index)
 		{
 			return this.textFieldListCombo.ActiveText;
 		}
@@ -84,16 +81,14 @@ namespace UnipayFormMaker
 			set { this.sourceTextView.Buffer.Text = value;}
 		}
 		
-		private void ComboBoxPopulate(ComboBox comboBox, List<object[]> alValuesList ) 
+		private void ComboBoxPopulate(ComboBox comboBox, List<String> alValuesList ) 
 		{ 
-			//		comboBox.Clear();
-			// types of ListStore columns are taken from alValuesList 
-			ListStore listStore = new Gtk.ListStore( alValuesList[0][0].GetType() ); 
+			ListStore listStore = new Gtk.ListStore( alValuesList[0].GetType() ); 
 			comboBox.Model = listStore; 
 			CellRendererText text = new CellRendererText(); 
 			comboBox.PackStart(text, true); 
 			
-			foreach (object[] oaValue in alValuesList) 
+			foreach (String oaValue in alValuesList) 
 			{ 
 				listStore.AppendValues(oaValue); 
 			} 
@@ -106,7 +101,17 @@ namespace UnipayFormMaker
 			
 			
 		}
-		
+
+		public bool PagesBoxSensitive
+		{
+			set { this.textFieldListCombo.Sensitive = value; }
+		}
+
+		public bool PagesButtonSensitive
+		{
+			set { this.textFieldButton.Sensitive = value; }
+		}
+
 		protected void OnFormNameTextChanged (object sender, EventArgs e)
 		{
 			FormController.GetInstance().SetFormName(this.FormName);
@@ -115,6 +120,12 @@ namespace UnipayFormMaker
 		protected void OnButtonOkClicked (object sender, EventArgs e)
 		{
 			Destroy();
+		}
+
+		protected void OnTextFieldListComboChanged (object sender, EventArgs e)
+		{
+
+			this.PagesButtonSensitive = FieldsController.GetInstance().SetSelectedPage(this.textFieldListCombo.Active);
 		}
 	}
 }

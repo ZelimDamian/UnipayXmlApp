@@ -100,6 +100,18 @@ namespace UnipayFormMaker
 			return result.ToString();
 		}
 
+		public List<String> GetPagesNumList()
+		{
+			List<String> list = new List<String>();
+			
+			for(int i = 0; i < Pages.Count; i ++)
+			{
+				list.Add(i.ToString());
+			}
+			
+			return list;
+		}
+
 		public List<object[]> GetFieldsAsObjects()
 		{
 			List<object[]> list = new List<object[]>();

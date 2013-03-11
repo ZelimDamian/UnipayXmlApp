@@ -1,6 +1,5 @@
 using System;
 using UnipayFormMaker.Fields;
-using UnipayFormMaker.Pages;
 
 namespace UnipayFormMaker
 {
@@ -8,8 +7,11 @@ namespace UnipayFormMaker
 	{
 		public static FieldsController instance = null;
 		public static FieldsDialog dialog = null;
-		public static FormModel Model
-		{ get { return FormController.Model; }
+		static Pages.Page page = null;
+		public static Pages.Page Page
+		{
+			get { return page; }
+			set { page = value; }
 		}
 
 		public static FieldsController GetInstance()
@@ -24,6 +26,19 @@ namespace UnipayFormMaker
 
 		}
 
+		public bool SetSelectedPage(int index)
+		{
+			try{
+				Page = FormController.Model.Pages[index];
+				return true;
+			}catch(Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				Page = FormController.Model.Pages[0];
+				return false;
+			}
+		}
+
 		public void ShowDialog()
 		{
 			if(dialog!=null)
@@ -35,18 +50,26 @@ namespace UnipayFormMaker
 
 		public void UpdateFieldList ()
 		{
-//			dialog.ClearFieldsList();
+			dialog.ClearFieldsList();
 
-			foreach(Page page in Model.Pages)
+
+			foreach(Field field in Page.Fields)
 			{
-				foreach(Field field in page.Fields)
-					this.AddFieldToView(field);
+				dialog.AddFieldToVBox(field.Name,
+				                      field.Keyboard,
+				                      field.MaxLen,
+				                      field.Example,
+				                      field.Message,
+				                      field.Title,
+				                      field.Regex,
+				                      field.Split,
+				                      field.Help);
 			}
 		}
 
 		public void AddFieldToModel(Field field)
 		{
-			Model.Pages[0].Fields.Add(field);
+			Page.Fields.Add(field);
 		}
 
 		public void AddNewTextField( )
@@ -55,23 +78,15 @@ namespace UnipayFormMaker
 			field.Name = "something";
 
 			AddFieldToModel(field);
-			AddFieldToView( field );
+			UpdateFieldList();		
 		}
 
-		public void AddNewDigitField( )
-		{
-			Field field = new DigitField();
-			field.Name = "something";
-			
-			AddFieldToModel(field);
-
-			AddFieldToView( field );
-		}
 
 		public void AddFieldToView( Field field )
 		{
 			dialog.AddFieldToVBox(field.Name, field.Keyboard, field.MaxLen, field.Example, field.Message, field.Title, field.Regex, field.Split, field.Text);
 		}
+
 	}
 }
 

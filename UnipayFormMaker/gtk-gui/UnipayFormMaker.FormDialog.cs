@@ -148,12 +148,14 @@ namespace UnipayFormMaker
 			w10.Padding = ((uint)(6));
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.paymentTypeCombo = global::Gtk.ComboBox.NewText ();
+			this.paymentTypeCombo.Sensitive = false;
 			this.paymentTypeCombo.Name = "paymentTypeCombo";
 			this.hbox1.Add (this.paymentTypeCombo);
 			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.paymentTypeCombo]));
 			w11.Position = 1;
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.paymentTypeButton = new global::Gtk.Button ();
+			this.paymentTypeButton.Sensitive = false;
 			this.paymentTypeButton.CanFocus = true;
 			this.paymentTypeButton.Name = "paymentTypeButton";
 			this.paymentTypeButton.UseUnderline = true;
@@ -174,7 +176,7 @@ namespace UnipayFormMaker
 			// Container child hbox2.Gtk.Box+BoxChild
 			this.label4 = new global::Gtk.Label ();
 			this.label4.Name = "label4";
-			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString ("Вводимые поля");
+			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString ("Страницы");
 			this.hbox2.Add (this.label4);
 			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.label4]));
 			w14.Position = 0;
@@ -375,6 +377,7 @@ namespace UnipayFormMaker
 			this.formIdEntry.Changed += new global::System.EventHandler (this.OnFormIdEntryChanged);
 			this.formNameText.Changed += new global::System.EventHandler (this.OnFormNameTextChanged);
 			this.paymentTypeButton.Clicked += new global::System.EventHandler (this.OnPaymentTypeButtonClicked);
+			this.textFieldListCombo.Changed += new global::System.EventHandler (this.OnTextFieldListComboChanged);
 			this.textFieldButton.Clicked += new global::System.EventHandler (this.OnTextFieldButtonClicked);
 			this.GenerateButton.Clicked += new global::System.EventHandler (this.OnGenerateButtonClicked);
 			this.convertButton.Clicked += new global::System.EventHandler (this.OnConvertButtonClicked);
