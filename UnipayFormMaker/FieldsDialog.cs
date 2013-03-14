@@ -8,6 +8,7 @@ namespace UnipayFormMaker
 {
 	public class FieldNode : Gtk.TreeNode
 	{
+		ing id;
 		String name;
 		String keyboard;
 		String maxLen;
@@ -18,8 +19,9 @@ namespace UnipayFormMaker
 		String split;
 		String help;
 
-		public FieldNode (string name, string keyboard, string maxLen, string example, string message, string title, string regex, string split, string help)
+		public FieldNode (int id, string name, string keyboard, string maxLen, string example, string message, string title, string regex, string split, string help)
 		{
+			this.id = id;
 			this.name = name;
 			this.keyboard = keyboard;
 			this.maxLen = maxLen;
@@ -30,34 +32,48 @@ namespace UnipayFormMaker
 			this.split = split;
 			this.help = help;
 		}
-		
+
+		public int Id
+		{
+			set { this.id = value; }
+			get { return this.id;  }
+		}
 
 		[Gtk.TreeNodeValue (Column=0)]
-		public string Name {get { return name; } }
+		public string Name {get { return name; } 
+			set {this.name = value; }}
 
 		[Gtk.TreeNodeValue (Column=1)]
-		public string Keyboard {get { return keyboard; } }
+		public string Keyboard {get { return keyboard; } 
+			set {this.keyboard = value; }}
 
 		[Gtk.TreeNodeValue (Column=2)]
-		public string MaxLen {get { return maxLen; } }
+		public string MaxLen {get { return maxLen; } 
+			set {this.maxLen = value; }}
 
 		[Gtk.TreeNodeValue (Column=3)]
-		public string Example {get { return example; } }
+		public string Example {get { return example; } 
+			set {this.example = value; }}
 
 		[Gtk.TreeNodeValue (Column=4)]
-		public string Message {get { return message; } }
+		public string Message {get { return message; } 
+			set { this.message = value; }}
 
 		[Gtk.TreeNodeValue (Column=5)]
-		public string Title {get { return title; } }
+		public string Title {get { return title; } 
+			set {this.title = value; }}
 
 		[Gtk.TreeNodeValue (Column=6)]
-		public string Regex {get { return regex; } }
+		public string Regex {get { return regex; } 
+			set {this.regex = value; }}
 
 		[Gtk.TreeNodeValue (Column=7)]
-		public string Split {get { return split; } }
+		public string Split {get { return split; } 
+			set {this.split = value; }}
 
 		[Gtk.TreeNodeValue (Column=8)]
-		public string Help {get { return help; } }
+		public string Help {get { return help; } 
+			set {this.help = value; }}
 
 
 	}
@@ -67,15 +83,64 @@ namespace UnipayFormMaker
 		public FieldsDialog ()
 		{
 			this.Build ();
-			this.nodeView.AppendColumn ("Имя", new Gtk.CellRendererText (), "text", 0);
-			this.nodeView.AppendColumn ("Клавиатура", new Gtk.CellRendererText (), "text", 1);
-			this.nodeView.AppendColumn ("Максимальная длина", new Gtk.CellRendererText (), "text", 2);
-			this.nodeView.AppendColumn ("Сообщение", new Gtk.CellRendererText (), "text", 3);
-			this.nodeView.AppendColumn ("Пример", new Gtk.CellRendererText (), "text", 4);
-			this.nodeView.AppendColumn ("Заглавие", new Gtk.CellRendererText (), "text", 5);
-			this.nodeView.AppendColumn ("Рег. выражение", new Gtk.CellRendererText (), "text", 6);
-			this.nodeView.AppendColumn ("Разделитель", new Gtk.CellRendererText (), "text", 7);
-			this.nodeView.AppendColumn ("Помощь", new Gtk.CellRendererText (), "text", 8);
+			CellRendererText nameCell = new Gtk.CellRendererText ();
+			nameCell.Editable = true;
+		
+			nameCell.Edited += delegate(object o, EditedArgs args) {
+				nodeView.NodeSelection.SelectPath(new TreePath(args.Path));
+				FieldNode node = (FieldNode) nodeView.NodeSelection.SelectedNode;
+				node.Name = args.NewText;
+			};
+
+			this.nodeView.AppendColumn ("Имя", nameCell, "text", 0);
+			CellRendererText keyboardCell = new Gtk.CellRendererText ();
+			keyboardCell.Editable = true;
+			nameCell.Edited += delegate(object o, EditedArgs args) {
+				
+			};
+			this.nodeView.AppendColumn ("Клавиатура", keyboardCell, "text", 1);
+			CellRendererText maxLenCell = new Gtk.CellRendererText ();
+			maxLenCell.Editable = true;
+			nameCell.Edited += delegate(object o, EditedArgs args) {
+				
+			};
+			this.nodeView.AppendColumn ("Максимальная длина", maxLenCell, "text", 2);
+			CellRendererText messageCell = new Gtk.CellRendererText ();
+			messageCell.Editable = true;
+			nameCell.Edited += delegate(object o, EditedArgs args) {
+				
+			};
+			this.nodeView.AppendColumn ("Сообщение", messageCell, "text", 3);
+			CellRendererText exampleCell = new Gtk.CellRendererText ();
+			exampleCell.Editable = true;
+			nameCell.Edited += delegate(object o, EditedArgs args) {
+				
+			};
+			this.nodeView.AppendColumn ("Пример", exampleCell, "text", 4);
+			CellRendererText titleCell = new Gtk.CellRendererText ();
+			titleCell.Editable = true;
+			nameCell.Edited += delegate(object o, EditedArgs args) {
+				
+			};
+			this.nodeView.AppendColumn ("Заглавие", titleCell, "text", 5);
+			CellRendererText regexCell = new Gtk.CellRendererText ();
+			regexCell.Editable = true;
+			nameCell.Edited += delegate(object o, EditedArgs args) {
+				
+			};
+			this.nodeView.AppendColumn ("Рег. выражение", regexCell, "text", 6);
+			CellRendererText splitCell = new Gtk.CellRendererText ();
+			splitCell.Editable = true;
+			nameCell.Edited += delegate(object o, EditedArgs args) {
+				
+			};
+			this.nodeView.AppendColumn ("Разделитель", splitCell, "text", 7);
+			CellRendererText helpCell = new Gtk.CellRendererText ();
+			helpCell.Editable = true;
+			nameCell.Edited += delegate(object o, EditedArgs args) {
+				
+			};
+			this.nodeView.AppendColumn ("Помощь", helpCell, "text", 8);
 		}
 
 		protected void OnButtonCancelClicked (object sender, EventArgs e)
@@ -95,7 +160,8 @@ namespace UnipayFormMaker
 //			FieldsController.GetInstance().AddNewDigitField();
 		}
 
-		public void AddFieldToVBox( String name, 
+		public void AddFieldToVBox( int id,
+		                           String name, 
 		                           String keyboard,
 		                           int maxLen,
 		                           String example,
@@ -105,7 +171,7 @@ namespace UnipayFormMaker
 		                           String split,
 		                           String help )
 		{
-			FieldNode node = new FieldNode(name, keyboard, maxLen.ToString(), example, message, title, regex, split, help);
+			FieldNode node = new FieldNode(id, name, keyboard, maxLen.ToString(), example, message, title, regex, split, help);
 			nodeView.NodeStore.AddNode(node);
 		}
 

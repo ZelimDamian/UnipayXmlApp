@@ -52,10 +52,12 @@ namespace UnipayFormMaker
 		{
 			dialog.ClearFieldsList();
 
+			int id = 0;
 
 			foreach(Field field in Page.Fields)
 			{
-				dialog.AddFieldToVBox(field.Name,
+				dialog.AddFieldToVBox(id++, 
+				                      field.Name,
 				                      field.Keyboard,
 				                      field.MaxLen,
 				                      field.Example,
