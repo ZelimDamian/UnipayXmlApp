@@ -56,7 +56,7 @@ namespace UnipayFormMaker
 
 			foreach(Field field in Page.Fields)
 			{
-				dialog.AddFieldToVBox(id++, 
+				dialog.AddFieldToVBox(id++,
 				                      field.Name,
 				                      field.Keyboard,
 				                      field.MaxLen,
