@@ -8,7 +8,7 @@ namespace UnipayFormMaker
 {
 	public class FieldNode : Gtk.TreeNode
 	{
-		ing id;
+		int id;
 		String name;
 		String keyboard;
 		String maxLen;
@@ -90,6 +90,7 @@ namespace UnipayFormMaker
 				nodeView.NodeSelection.SelectPath(new TreePath(args.Path));
 				FieldNode node = (FieldNode) nodeView.NodeSelection.SelectedNode;
 				node.Name = args.NewText;
+				FieldsController.GetInstance().GetFieldById(node.Id).Name = args.NewText;
 			};
 
 			this.nodeView.AppendColumn ("Имя", nameCell, "text", 0);

@@ -77,16 +77,20 @@ namespace UnipayFormMaker
 		public void AddNewTextField( )
 		{
 			Field field = new TextField();
-			field.Name = "something";
+			field.Name = "Новое поле";
 
 			AddFieldToModel(field);
 			UpdateFieldList();		
 		}
 
-
-		public void AddFieldToView( Field field )
+		public Field GetFieldById(int id)
 		{
-			dialog.AddFieldToVBox(field.Name, field.Keyboard, field.MaxLen, field.Example, field.Message, field.Title, field.Regex, field.Split, field.Text);
+			return Page.Fields[id];
+		}
+
+		public void AddFieldToView( int index, Field field )
+		{
+			dialog.AddFieldToVBox(index, field.Name, field.Keyboard, field.MaxLen, field.Example, field.Message, field.Title, field.Regex, field.Split, field.Text);
 		}
 
 	}
