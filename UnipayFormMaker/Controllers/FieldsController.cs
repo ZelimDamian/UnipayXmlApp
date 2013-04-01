@@ -8,10 +8,18 @@ namespace UnipayFormMaker
 		public static FieldsController instance = null;
 		public static FieldsDialog dialog = null;
 		static Pages.Page page = null;
+		static Field field = null;
+
 		public static Pages.Page Page
 		{
 			get { return page; }
 			set { page = value; }
+		}
+
+		public static Field Field
+		{
+			get { return field; }
+			set { field = value; }
 		}
 
 		public static FieldsController GetInstance()
@@ -37,6 +45,23 @@ namespace UnipayFormMaker
 				Page = FormController.Model.Pages[0];
 				return false;
 			}
+		}
+
+		public void SetSelectedField(int index)
+		{
+			try
+			{
+				field = page.Fields[index];
+			}catch(Exception)
+			{
+				return;
+			}
+		}
+
+		public void RemoveSelectedField()
+		{
+			page.Fields.Remove(field);
+			UpdateFieldList();
 		}
 
 		public void ShowDialog()

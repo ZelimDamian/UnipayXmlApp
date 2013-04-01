@@ -43,6 +43,13 @@ namespace UnipayFormMaker
 			dialog.ResultText = Model.GenerateXMLString();
 		}
 
+		public void AddNewPage()
+		{
+			Model.Pages.Add(new Pages.Page());
+
+			dialog.UpdatePageList(Model.GetPagesNumList());
+		}
+
 		public void SetFormID(int id)
 		{
 			Model.Id = id;
@@ -90,6 +97,11 @@ namespace UnipayFormMaker
 			return FormFactory.GetInstance().ConvertPhpToXml(part);
 		}
 
+		public void RemoveSelectedPage()
+		{
+			if(FieldsController.Page != null)
+				Model.Pages.Remove(FieldsController.Page);
+		}
 	}
 }
 

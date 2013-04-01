@@ -100,13 +100,13 @@ namespace UnipayFormMaker
 			return result.ToString();
 		}
 
-		public List<String> GetPagesNumList()
+		public List<String[]> GetPagesNumList()
 		{
-			List<String> list = new List<String>();
+			List<String[]> list = new List<String[]>();
 			
 			for(int i = 0; i < Pages.Count; i ++)
 			{
-				list.Add(i.ToString());
+				list.Add(new String[] { i.ToString(), Pages[i].AggregateFieldNames()});
 			}
 			
 			return list;

@@ -5,12 +5,20 @@ namespace UnipayFormMaker.Fields
 {
 	public class Field
 	{
+		public static String[] KeyboardList = new string[]{
+			"Digital",
+         	"LetterEn",
+         	"LetterEnRu",
+         	"Digital",
+         	"letter:ru:any::upper:true"
+		};
+
 		public static class KeyboardType
 		{
-			public const String Digital = "Digital";
-			public const String Letters = "LetterEn";
-			public const String LettersEnRu = "LetterEnRu";
-			public const String Latinic = "Digital";
+			public const String Digital = 		"Digital";
+			public const String Letters = 		"LetterEn";
+			public const String LettersEnRu = 	"LetterEnRu";
+			public const String Latinic = 		"Digital";
 			public const String CyrillicUpper = "letter:ru:any::upper:true";
 		}
 
@@ -148,6 +156,7 @@ namespace UnipayFormMaker.Fields
 
 			writer.WriteEndElement();
 		}
+
 	}
 	
 	public class TextField : Field

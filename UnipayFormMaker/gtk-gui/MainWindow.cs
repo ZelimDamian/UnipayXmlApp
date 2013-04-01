@@ -29,6 +29,7 @@ public partial class MainWindow
 	private global::Gtk.Button deleteFormButton;
 	private global::Gtk.Alignment alignment2;
 	private global::Gtk.Button button1544;
+	private global::Gtk.Button closeButton;
 	
 	protected virtual void Build ()
 	{
@@ -49,6 +50,7 @@ public partial class MainWindow
 		this.GtkAlignment = new global::Gtk.Alignment (0F, 0F, 1F, 1F);
 		this.GtkAlignment.Name = "GtkAlignment";
 		this.GtkAlignment.LeftPadding = ((uint)(12));
+		this.GtkAlignment.BorderWidth = ((uint)(6));
 		// Container child GtkAlignment.Gtk.Container+ContainerChild
 		this.vbox4 = new global::Gtk.VBox ();
 		this.vbox4.Name = "vbox4";
@@ -139,6 +141,7 @@ public partial class MainWindow
 		this.vbox5 = new global::Gtk.VBox ();
 		this.vbox5.Name = "vbox5";
 		this.vbox5.Spacing = 6;
+		this.vbox5.BorderWidth = ((uint)(6));
 		// Container child vbox5.Gtk.Box+BoxChild
 		this.frame4 = new global::Gtk.Frame ();
 		this.frame4.Name = "frame4";
@@ -315,14 +318,40 @@ public partial class MainWindow
 		w69.Position = 4;
 		w69.Expand = false;
 		w69.Fill = false;
+		// Container child hbox2.Gtk.Box+BoxChild
+		this.closeButton = new global::Gtk.Button ();
+		this.closeButton.CanFocus = true;
+		this.closeButton.Name = "closeButton";
+		this.closeButton.UseUnderline = true;
+		// Container child closeButton.Gtk.Container+ContainerChild
+		global::Gtk.Alignment w70 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
+		// Container child GtkAlignment.Gtk.Container+ContainerChild
+		global::Gtk.HBox w71 = new global::Gtk.HBox ();
+		w71.Spacing = 2;
+		// Container child GtkHBox.Gtk.Container+ContainerChild
+		global::Gtk.Image w72 = new global::Gtk.Image ();
+		w72.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-close", global::Gtk.IconSize.Menu);
+		w71.Add (w72);
+		// Container child GtkHBox.Gtk.Container+ContainerChild
+		global::Gtk.Label w74 = new global::Gtk.Label ();
+		w74.LabelProp = global::Mono.Unix.Catalog.GetString ("Закрыть");
+		w74.UseUnderline = true;
+		w71.Add (w74);
+		w70.Add (w71);
+		this.closeButton.Add (w70);
+		this.hbox2.Add (this.closeButton);
+		global::Gtk.Box.BoxChild w78 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.closeButton]));
+		w78.Position = 5;
+		w78.Expand = false;
+		w78.Fill = false;
 		this.vbox5.Add (this.hbox2);
-		global::Gtk.Box.BoxChild w70 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.hbox2]));
-		w70.Position = 1;
-		w70.Expand = false;
-		w70.Fill = false;
+		global::Gtk.Box.BoxChild w79 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.hbox2]));
+		w79.Position = 1;
+		w79.Expand = false;
+		w79.Fill = false;
 		this.vbox3.Add (this.vbox5);
-		global::Gtk.Box.BoxChild w71 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.vbox5]));
-		w71.Position = 1;
+		global::Gtk.Box.BoxChild w80 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.vbox5]));
+		w80.Position = 1;
 		this.Add (this.vbox3);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
@@ -334,9 +363,11 @@ public partial class MainWindow
 		this.convertButton.Clicked += new global::System.EventHandler (this.OnConvertButtonClicked);
 		this.openFileButton.Clicked += new global::System.EventHandler (this.OpenFileButtonClicked);
 		this.nodeview1.ButtonPressEvent += new global::Gtk.ButtonPressEventHandler (this.OnNodeview1ButtonPressEvent);
+		this.nodeview1.Focused += new global::Gtk.FocusedHandler (this.OnNodeview1Focused);
 		this.newFormButton.Clicked += new global::System.EventHandler (this.OnNewFormButtonClicked);
 		this.openFormButton.Clicked += new global::System.EventHandler (this.OnOpenFormButtonClicked);
 		this.deleteFormButton.Clicked += new global::System.EventHandler (this.OnDeleteFormButtonClicked);
 		this.button1544.Clicked += new global::System.EventHandler (this.OnSaveAllButtonClicked);
+		this.closeButton.Clicked += new global::System.EventHandler (this.OnCloseButtonClicked);
 	}
 }

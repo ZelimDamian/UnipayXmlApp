@@ -5,11 +5,55 @@ using Gdk;
 
 namespace UnipayFormMaker
 {
+
 	public partial class FormDialog : Gtk.Dialog
 	{
+		public class PageNodeCell : Gtk.TreeNode
+		{
+			private int id;
+			private String name;
+			private String fields;
+
+			public PageNodeCell (int id, string name, string fields)
+			{
+				this.id = id;
+				this.name = name;
+				this.fields = fields;
+			}
+
+			public int Id
+			{
+				set { this.id = value; }
+				get { return this.id;  }
+			}
+
+			[Gtk.TreeNodeValue (Column = 0) ]
+			public String Name
+			{
+				set { this.name = value; }
+				get { return this.name;  }
+			}
+
+			[Gtk.TreeNodeValue (Column = 1)]
+			public String Fields
+			{
+				set { this.fields = value; }
+				get { return this.fields;  }
+			}
+		}
+
+
 		public FormDialog ()
 		{
 			this.Build ();
+			RemoveAllFromPagesNodeView();
+			pagesNodeView.AppendColumn ("Номер", new Gtk.CellRendererText (), "text", 0);
+			pagesNodeView.AppendColumn ("Поля", new Gtk.CellRendererText (), "text", 1);
+			pagesNodeView.NodeSelection.Changed += delegate(object sender, EventArgs e) {
+				PageNodeCell cell = pagesNodeView.NodeSelection.SelectedNode as PageNodeCell;
+				if(cell != null)
+					FieldsController.GetInstance().SetSelectedPage(cell.Id);
+			};
 		}
 
 		protected void OnPaymentTypeButtonClicked (object sender, EventArgs e)
@@ -49,27 +93,27 @@ namespace UnipayFormMaker
 		
 	
 		
-		public void UpdatePageList(List<String> PageList)
+		public void UpdatePageList(List<String[]> PageList)
 		{
 			if(PageList.Count != 0)
-				ComboBoxPopulate(this.textFieldListCombo, PageList);
+				NodeViewPopulate(this.pagesNodeView, PageList);
 		}
 		
-		public void RemoveAllFromPagesCombo()
+		public void RemoveAllFromPagesNodeView()
 		{
-			this.textFieldListCombo.Clear ();
+			pagesNodeView.NodeStore = new NodeStore(typeof(PageNodeCell));
 		}
 		
 		public String GetSelectedTextPage(int index)
 		{
-			return this.textFieldListCombo.ActiveText;
+			return (this.pagesNodeView.NodeSelection.SelectedNode as PageNodeCell).Name;
 		}
 		
 		protected void OnFormIdEntryChanged (object sender, EventArgs e)
 		{
 			FormController.GetInstance().SetFormID(this.FormId);
 		}
-		
+
 		protected void OnConvertButtonClicked (object sender, EventArgs e)
 		{
 			FormController.GetInstance().InitiateConvertion();
@@ -81,30 +125,20 @@ namespace UnipayFormMaker
 			set { this.sourceTextView.Buffer.Text = value;}
 		}
 		
-		private void ComboBoxPopulate(ComboBox comboBox, List<String> alValuesList ) 
+		private void NodeViewPopulate(NodeView nodeView, List<String[]> alValuesList ) 
 		{ 
-			ListStore listStore = new Gtk.ListStore( alValuesList[0].GetType() ); 
-			comboBox.Model = listStore; 
-			CellRendererText text = new CellRendererText(); 
-			comboBox.PackStart(text, true); 
-			
-			foreach (String oaValue in alValuesList) 
+			RemoveAllFromPagesNodeView();
+
+			int i = 0;
+			foreach (String[] oaValue in alValuesList) 
 			{ 
-				listStore.AppendValues(oaValue); 
-			} 
-			
-			TreeIter iter; 
-			if (listStore.GetIterFirst (out iter)) 
-			{ 
-				comboBox.SetActiveIter (iter); 
-			} 
-			
-			
+				nodeView.NodeStore.AddNode(new PageNodeCell(i++, oaValue[0], oaValue[1])); 
+			}
 		}
 
 		public bool PagesBoxSensitive
 		{
-			set { this.textFieldListCombo.Sensitive = value; }
+			set { this.pagesNodeView.Sensitive = value; }
 		}
 
 		public bool PagesButtonSensitive
@@ -124,8 +158,12 @@ namespace UnipayFormMaker
 
 		protected void OnTextFieldListComboChanged (object sender, EventArgs e)
 		{
+			this.PagesButtonSensitive = FieldsController.GetInstance().SetSelectedPage(this.pagesNodeView.NodeSelection.SelectedNode.ID);
+		}
 
-			this.PagesButtonSensitive = FieldsController.GetInstance().SetSelectedPage(this.textFieldListCombo.Active);
+		protected void OnNewPageButtonClicked (object sender, EventArgs e)
+		{
+			FormController.GetInstance().AddNewPage();
 		}
 	}
 }

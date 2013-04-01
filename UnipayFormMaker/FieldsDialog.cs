@@ -52,12 +52,12 @@ namespace UnipayFormMaker
 			set {this.maxLen = value; }}
 
 		[Gtk.TreeNodeValue (Column=3)]
-		public string Example {get { return example; } 
-			set {this.example = value; }}
-
-		[Gtk.TreeNodeValue (Column=4)]
 		public string Message {get { return message; } 
 			set { this.message = value; }}
+
+		[Gtk.TreeNodeValue (Column=4)]
+		public string Example {get { return example; } 
+			set {this.example = value; }}
 
 		[Gtk.TreeNodeValue (Column=5)]
 		public string Title {get { return title; } 
@@ -83,6 +83,8 @@ namespace UnipayFormMaker
 		public FieldsDialog ()
 		{
 			this.Build ();
+
+
 			CellRendererText nameCell = new Gtk.CellRendererText ();
 			nameCell.Editable = true;
 		
@@ -92,60 +94,110 @@ namespace UnipayFormMaker
 				node.Name = args.NewText;
 				FieldsController.GetInstance().GetFieldById(node.Id).Name = args.NewText;
 			};
-
 			this.nodeView.AppendColumn ("Имя", nameCell, "text", 0);
-			CellRendererText keyboardCell = new Gtk.CellRendererText ();
-			keyboardCell.Editable = true;
-			nameCell.Edited += delegate(object o, EditedArgs args) {
-				
-			};
-			this.nodeView.AppendColumn ("Клавиатура", keyboardCell, "text", 1);
+
+			ComboBox compteComboBox = new Gtk.ComboBox(Fields.Field.KeyboardList);
+			Gtk.TreeViewColumn compteColumn = new TreeViewColumn();
+
+			Gtk.CellRendererCombo compteCellCombo = new CellRendererCombo();
+			compteColumn.PackStart(compteCellCombo, true);
+			compteCellCombo.TextColumn = 0;
+			compteCellCombo.Editable = true;
+			compteCellCombo.Edited += delegate(object o, EditedArgs args) {
+					nodeView.NodeSelection.SelectPath(new TreePath(args.Path));
+					FieldNode node = (FieldNode) nodeView.NodeSelection.SelectedNode;
+					node.Keyboard = args.NewText;
+					FieldsController.GetInstance().GetFieldById(node.Id).Keyboard = args.NewText;
+				};
+			compteCellCombo.HasEntry = false;
+			compteCellCombo.Model = compteComboBox.Model;
+			compteCellCombo.Text = compteComboBox.ActiveText;
+
+			this.nodeView.AppendColumn ("Клавиатура", compteCellCombo, "text", 1);
+
 			CellRendererText maxLenCell = new Gtk.CellRendererText ();
 			maxLenCell.Editable = true;
-			nameCell.Edited += delegate(object o, EditedArgs args) {
-				
+			maxLenCell.Edited += delegate(object o, EditedArgs args) {
+				nodeView.NodeSelection.SelectPath(new TreePath(args.Path));
+				FieldNode node = (FieldNode) nodeView.NodeSelection.SelectedNode;
+				try{
+					int maxLen = int.Parse(args.NewText);
+					node.MaxLen = args.NewText;
+					FieldsController.GetInstance().GetFieldById(node.Id).MaxLen = maxLen;
+				}catch(Exception) {	return;	}
 			};
 			this.nodeView.AppendColumn ("Максимальная длина", maxLenCell, "text", 2);
+
 			CellRendererText messageCell = new Gtk.CellRendererText ();
 			messageCell.Editable = true;
-			nameCell.Edited += delegate(object o, EditedArgs args) {
-				
+			messageCell.Edited += delegate(object o, EditedArgs args) {
+				nodeView.NodeSelection.SelectPath(new TreePath(args.Path));
+				FieldNode node = (FieldNode) nodeView.NodeSelection.SelectedNode;
+				node.Message = args.NewText;
+				FieldsController.GetInstance().GetFieldById(node.Id).Message = args.NewText;
 			};
 			this.nodeView.AppendColumn ("Сообщение", messageCell, "text", 3);
+
 			CellRendererText exampleCell = new Gtk.CellRendererText ();
 			exampleCell.Editable = true;
-			nameCell.Edited += delegate(object o, EditedArgs args) {
-				
+			exampleCell.Edited += delegate(object o, EditedArgs args) {
+				nodeView.NodeSelection.SelectPath(new TreePath(args.Path));
+				FieldNode node = (FieldNode) nodeView.NodeSelection.SelectedNode;
+				node.Example = args.NewText;
+				FieldsController.GetInstance().GetFieldById(node.Id).Example = args.NewText;
 			};
 			this.nodeView.AppendColumn ("Пример", exampleCell, "text", 4);
+
 			CellRendererText titleCell = new Gtk.CellRendererText ();
 			titleCell.Editable = true;
-			nameCell.Edited += delegate(object o, EditedArgs args) {
-				
+			titleCell.Edited += delegate(object o, EditedArgs args) {
+				nodeView.NodeSelection.SelectPath(new TreePath(args.Path));
+				FieldNode node = (FieldNode) nodeView.NodeSelection.SelectedNode;
+				node.Title = args.NewText;
+				FieldsController.GetInstance().GetFieldById(node.Id).Title = args.NewText;
 			};
 			this.nodeView.AppendColumn ("Заглавие", titleCell, "text", 5);
+
 			CellRendererText regexCell = new Gtk.CellRendererText ();
 			regexCell.Editable = true;
-			nameCell.Edited += delegate(object o, EditedArgs args) {
-				
+			regexCell.Edited += delegate(object o, EditedArgs args) {
+				nodeView.NodeSelection.SelectPath(new TreePath(args.Path));
+				FieldNode node = (FieldNode) nodeView.NodeSelection.SelectedNode;
+				node.Regex = args.NewText;
+				FieldsController.GetInstance().GetFieldById(node.Id).Regex = args.NewText;
 			};
 			this.nodeView.AppendColumn ("Рег. выражение", regexCell, "text", 6);
+
 			CellRendererText splitCell = new Gtk.CellRendererText ();
 			splitCell.Editable = true;
-			nameCell.Edited += delegate(object o, EditedArgs args) {
-				
+			splitCell.Edited += delegate(object o, EditedArgs args) {
+				nodeView.NodeSelection.SelectPath(new TreePath(args.Path));
+				FieldNode node = (FieldNode) nodeView.NodeSelection.SelectedNode;
+				node.Split = args.NewText;
+				FieldsController.GetInstance().GetFieldById(node.Id).Split = args.NewText;
 			};
 			this.nodeView.AppendColumn ("Разделитель", splitCell, "text", 7);
+
 			CellRendererText helpCell = new Gtk.CellRendererText ();
 			helpCell.Editable = true;
-			nameCell.Edited += delegate(object o, EditedArgs args) {
-				
+			helpCell.Edited += delegate(object o, EditedArgs args) {
+				nodeView.NodeSelection.SelectPath(new TreePath(args.Path));
+				FieldNode node = (FieldNode) nodeView.NodeSelection.SelectedNode;
+				node.Help = args.NewText;
+				FieldsController.GetInstance().GetFieldById(node.Id).Help = args.NewText;
 			};
 			this.nodeView.AppendColumn ("Помощь", helpCell, "text", 8);
+
+			this.nodeView.NodeSelection.Changed += delegate(object sender, EventArgs e) {
+				FieldNode node = nodeView.NodeSelection.SelectedNode as FieldNode;
+				if(node != null)
+					FieldsController.GetInstance().SetSelectedField(node.Id);
+			};
 		}
 
 		protected void OnButtonCancelClicked (object sender, EventArgs e)
 		{
+			FormController.GetInstance().RemoveSelectedPage();
 			FormController.GetInstance().UpdateView();
 			this.Destroy();
 		}
@@ -184,6 +236,19 @@ namespace UnipayFormMaker
 		protected void OnAddFieldButtonClicked (object sender, EventArgs e)
 		{
 			FieldsController.GetInstance().AddNewTextField();
+		}
+
+		protected void OnNodeViewButtonPressEvent (object o, ButtonPressEventArgs args)
+		{
+			if(args.Event.Button == 2)
+			{
+
+			}
+		}
+
+		protected void OnRemoveFieldButtonClicked (object sender, EventArgs e)
+		{
+			FieldsController.GetInstance().RemoveSelectedField();
 		}
 	}
 }

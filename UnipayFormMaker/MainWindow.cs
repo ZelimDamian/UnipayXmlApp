@@ -20,7 +20,7 @@ public partial class MainWindow: Gtk.Window
 		public string FormName {get { return formName; } }
 	}
 
-	Gtk.TreeModelFilter filter;
+	TreeModelFilter filter;
 
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
@@ -31,7 +31,7 @@ public partial class MainWindow: Gtk.Window
 			this.sourceHolder = sourseTextView.Buffer.Text;
 		};
 
-		searchEntry.Changed += OnFilterEntryTextChanged;
+		//searchEntry.Changed += OnFilterEntryTextChanged;
 	}
 
 	void OnFilterEntryTextChanged (object o, System.EventArgs args)
@@ -78,9 +78,9 @@ public partial class MainWindow: Gtk.Window
 			nodeView.NodeStore.AddNode(node);
 		}
 
-		filter = new TreeModelFilter (nodeView.Model, null);
-        filter.VisibleFunc = new Gtk.TreeModelFilterVisibleFunc(FilterTree);
-        nodeview1.Model = filter;
+		//filter = new TreeModelFilter (nodeView.Model, null);
+        //filter.VisibleFunc = new Gtk.TreeModelFilterVisibleFunc(FilterTree);
+        //nodeview1.Model = filter;
 	}
 
 	String sourceHolder = "";
@@ -111,16 +111,16 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OpenFileButtonClicked (object sender, EventArgs e)
 	{
-		Gtk.FileChooserDialog fc=
-			new Gtk.FileChooserDialog("Choose the file to open",
-			                          this,
-			                          FileChooserAction.Open,
-			                          "Cancel",ResponseType.Cancel,
-			                          "Open",ResponseType.Accept);
-		
+		Gtk.FileChooserDialog fc = new Gtk.FileChooserDialog("Choose the file to open",
+              this,
+              FileChooserAction.Open,
+              "Cancel",ResponseType.Cancel,
+              "Open",ResponseType.Accept);
+
 		if (fc.Run() == (int)ResponseType.Accept) 
 		{
 			SourceText = TextFileReader.GetInstance().ReadFile(fc.Filename);
+			MainController.GetInstance().ConvertAndUpdateView();
 		}
 		//Don't forget to call Destroy() or the FileChooserDialog window won't get closed.
 		fc.Destroy();
@@ -138,10 +138,10 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnNodeview1ButtonPressEvent (object o, ButtonPressEventArgs args)
 	{
-		Console.Beep();
 
-		if (args.Event.Button == 1) /* right click */
+		if(args.Event.Type == Gdk.EventType.TwoButtonPress)
 		{
+			Console.Beep();
 		}
 	}
 
@@ -157,5 +157,15 @@ public partial class MainWindow: Gtk.Window
 	protected void OnDeleteFormButtonClicked (object sender, EventArgs e)
 	{
 		MainController.GetInstance().RemoveSelectedForm();
+	}
+
+	protected void OnNodeview1Focused (object o, FocusedArgs args)
+	{
+		Console.Beep();
+	}
+
+	protected void OnCloseButtonClicked (object sender, EventArgs e)
+	{
+		Application.Quit();
 	}
 }

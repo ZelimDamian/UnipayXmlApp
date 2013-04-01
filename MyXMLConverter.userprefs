@@ -1,28 +1,25 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="UnipayFormMaker/FieldsDialog.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="UnipayFormMaker/MainWindow.cs">
     <Files>
-      <File FileName="UnipayFormMaker/Main.cs" Line="16" Column="1" />
-      <File FileName="UnipayFormMaker/Models/FormModel.cs" Line="26" Column="4" />
-      <File FileName="UnipayFormMaker/Controllers/FormController.cs" Line="27" Column="24" />
-      <File FileName="UnipayFormMaker/Controllers/MainController.cs" Line="119" Column="13" />
-      <File FileName="UnipayFormMaker/Factories/FormFactory.cs" Line="63" Column="6" />
-      <File FileName="UnipayFormMaker/Utilities/TextFileReader.cs" Line="10" Column="24" />
-      <File FileName="UnipayFormMaker/MainWindow.cs" Line="84" Column="3" />
-      <File FileName="UnipayFormMaker/Utilities/FileWriter.cs" Line="35" Column="52" />
-      <File FileName="UnipayFormMaker/Models/Fields.cs" Line="12" Column="35" />
-      <File FileName="UnipayFormMaker/Models/Page.cs" Line="23" Column="4" />
-      <File FileName="UnipayFormMaker/Models/PaymentType.cs" Line="5" Column="39" />
-      <File FileName="UnipayFormMaker/Controllers/FieldsController.cs" Line="73" Column="20" />
-      <File FileName="UnipayFormMaker/FormDialog.cs" Line="17" Column="25" />
-      <File FileName="UnipayFormMaker/FieldsDialog.cs" Line="12" Column="3" />
+      <File FileName="UnipayFormMaker/Models/FormModel.cs" Line="105" Column="43" />
+      <File FileName="UnipayFormMaker/FieldsDialog.cs" Line="200" Column="27" />
+      <File FileName="UnipayFormMaker/Controllers/FieldsController.cs" Line="25" Column="3" />
+      <File FileName="UnipayFormMaker/FormDialog.cs" Line="138" Column="3" />
+      <File FileName="UnipayFormMaker/Controllers/FormController.cs" Line="92" Column="10" />
+      <File FileName="UnipayFormMaker/MainWindow.cs" Line="19" Column="33" />
+      <File FileName="UnipayFormMaker/Factories/FormFactory.cs" Line="63" Column="1" />
+      <File FileName="UnipayFormMaker/Models/Fields.cs" Line="18" Column="45" />
+      <File FileName="UnipayFormMaker/Models/Page.cs" Line="58" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Option id="ShowVersionControlOverlays" value="False" />
           <Node name="UnipayFormMaker" expanded="True">
-            <Node name="UserInterface" expanded="True" selected="True" />
+            <Node name="UserInterface" expanded="True">
+              <Node name="MainWindow" selected="True" />
+            </Node>
             <Node name="Controllers" expanded="True" />
             <Node name="Factories" expanded="True" />
             <Node name="Models" expanded="True" />

@@ -48,6 +48,18 @@ namespace UnipayFormMaker.Pages
 			
 			return list;
 		}
+
+		public String AggregateFieldNames()
+		{
+			String acc = "";
+
+			foreach(Field field in this.Fields)
+			{
+				acc += field.Name + ", ";
+			}
+
+			return acc;
+		}
 	}
 }
 

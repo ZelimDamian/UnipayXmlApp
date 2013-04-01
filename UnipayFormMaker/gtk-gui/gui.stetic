@@ -34,6 +34,7 @@
                 <property name="Xalign">0</property>
                 <property name="Yalign">0</property>
                 <property name="LeftPadding">12</property>
+                <property name="BorderWidth">6</property>
                 <child>
                   <widget class="Gtk.VBox" id="vbox4">
                     <property name="MemberName" />
@@ -128,6 +129,7 @@
           <widget class="Gtk.VBox" id="vbox5">
             <property name="MemberName" />
             <property name="Spacing">6</property>
+            <property name="BorderWidth">6</property>
             <child>
               <widget class="Gtk.Frame" id="frame4">
                 <property name="MemberName" />
@@ -152,7 +154,8 @@
                                 <property name="CanFocus">True</property>
                                 <property name="ShowScrollbars">True</property>
                                 <property name="SearchColumn">0</property>
-                                <signal name="ButtonPressEvent" handler="OnNodeview1ButtonPressEvent" />
+                                <signal name="ButtonPressEvent" handler="OnNodeview1ButtonPressEvent" after="yes" />
+                                <signal name="Focused" handler="OnNodeview1Focused" />
                               </widget>
                             </child>
                           </widget>
@@ -301,6 +304,23 @@
                     <property name="Fill">False</property>
                   </packing>
                 </child>
+                <child>
+                  <widget class="Gtk.Button" id="closeButton">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextAndIcon</property>
+                    <property name="Icon">stock:gtk-close Menu</property>
+                    <property name="Label" translatable="yes">Закрыть</property>
+                    <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="OnCloseButtonClicked" />
+                  </widget>
+                  <packing>
+                    <property name="Position">5</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -350,6 +370,7 @@
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="ShowScrollbars">True</property>
+                            <signal name="ButtonPressEvent" handler="OnNodeViewButtonPressEvent" />
                           </widget>
                         </child>
                       </widget>
@@ -403,7 +424,21 @@
               </packing>
             </child>
             <child>
-              <placeholder />
+              <widget class="Gtk.Button" id="removeFieldButton">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextAndIcon</property>
+                <property name="Icon">stock:gtk-delete Menu</property>
+                <property name="Label" translatable="yes">Удалить</property>
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnRemoveFieldButtonClicked" />
+              </widget>
+              <packing>
+                <property name="Position">2</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
             </child>
           </widget>
           <packing>
@@ -429,7 +464,7 @@
             <property name="CanFocus">True</property>
             <property name="Type">TextAndIcon</property>
             <property name="Icon">stock:gtk-cancel Menu</property>
-            <property name="Label" translatable="yes">_Отменить</property>
+            <property name="Label" translatable="yes">_Удалить всю страницу</property>
             <property name="UseUnderline">True</property>
             <property name="ResponseId">-6</property>
             <signal name="Clicked" handler="OnButtonCancelClicked" />
@@ -557,7 +592,6 @@
                             <property name="CanFocus">True</property>
                             <property name="IsEditable">True</property>
                             <property name="InvisibleChar">●</property>
-                            <signal name="Changed" handler="OnFormNameTextChanged" />
                           </widget>
                           <packing>
                             <property name="Position">1</property>
@@ -641,32 +675,10 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.ComboBox" id="textFieldListCombo">
-                            <property name="MemberName" />
-                            <property name="Tooltip" translatable="yes">Список вводимых полей</property>
-                            <property name="IsTextCombo">True</property>
-                            <property name="Items" translatable="yes" />
-                            <signal name="Changed" handler="OnTextFieldListComboChanged" />
-                          </widget>
-                          <packing>
-                            <property name="Position">1</property>
-                            <property name="AutoSize">False</property>
-                          </packing>
+                          <placeholder />
                         </child>
                         <child>
-                          <widget class="Gtk.Button" id="textFieldButton">
-                            <property name="MemberName" />
-                            <property name="CanFocus">True</property>
-                            <property name="Type">TextOnly</property>
-                            <property name="Label" translatable="yes">Подробнее</property>
-                            <property name="UseUnderline">True</property>
-                            <signal name="Clicked" handler="OnTextFieldButtonClicked" />
-                          </widget>
-                          <packing>
-                            <property name="Position">2</property>
-                            <property name="AutoSize">False</property>
-                            <property name="Fill">False</property>
-                          </packing>
+                          <placeholder />
                         </child>
                       </widget>
                       <packing>
@@ -677,12 +689,60 @@
                       </packing>
                     </child>
                     <child>
-                      <placeholder />
+                      <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow2">
+                        <property name="MemberName" />
+                        <property name="ShadowType">In</property>
+                        <child>
+                          <widget class="Gtk.NodeView" id="pagesNodeView">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="ShowScrollbars">True</property>
+                          </widget>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="Position">4</property>
+                        <property name="AutoSize">True</property>
+                      </packing>
                     </child>
                     <child>
                       <widget class="Gtk.HBox" id="hbox4">
                         <property name="MemberName" />
                         <property name="Spacing">6</property>
+                        <child>
+                          <widget class="Gtk.Button" id="newPageButton">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Type">TextAndIcon</property>
+                            <property name="Icon">stock:gtk-add Menu</property>
+                            <property name="Label" translatable="yes">Новая страница</property>
+                            <property name="UseUnderline">True</property>
+                            <signal name="Clicked" handler="OnNewPageButtonClicked" />
+                          </widget>
+                          <packing>
+                            <property name="Position">0</property>
+                            <property name="AutoSize">True</property>
+                            <property name="Expand">False</property>
+                            <property name="Fill">False</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="Gtk.Button" id="textFieldButton">
+                            <property name="MemberName" />
+                            <property name="CanFocus">True</property>
+                            <property name="Type">TextAndIcon</property>
+                            <property name="Icon">stock:gtk-edit Menu</property>
+                            <property name="Label" translatable="yes">Редактировать страницу</property>
+                            <property name="UseUnderline">True</property>
+                            <signal name="Clicked" handler="OnTextFieldButtonClicked" />
+                          </widget>
+                          <packing>
+                            <property name="Position">1</property>
+                            <property name="AutoSize">True</property>
+                            <property name="Expand">False</property>
+                            <property name="Fill">False</property>
+                          </packing>
+                        </child>
                         <child>
                           <widget class="Gtk.Button" id="GenerateButton">
                             <property name="MemberName" />
@@ -694,7 +754,7 @@
                             <signal name="Clicked" handler="OnGenerateButtonClicked" />
                           </widget>
                           <packing>
-                            <property name="Position">0</property>
+                            <property name="Position">2</property>
                             <property name="AutoSize">False</property>
                             <property name="Fill">False</property>
                           </packing>

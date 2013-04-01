@@ -21,9 +21,11 @@ namespace UnipayFormMaker
 		private global::Gtk.Button paymentTypeButton;
 		private global::Gtk.HBox hbox2;
 		private global::Gtk.Label label4;
-		private global::Gtk.ComboBox textFieldListCombo;
-		private global::Gtk.Button textFieldButton;
+		private global::Gtk.ScrolledWindow GtkScrolledWindow2;
+		private global::Gtk.NodeView pagesNodeView;
 		private global::Gtk.HBox hbox4;
+		private global::Gtk.Button newPageButton;
+		private global::Gtk.Button textFieldButton;
 		private global::Gtk.Button GenerateButton;
 		private global::Gtk.Label label1;
 		private global::Gtk.VBox vbox4;
@@ -182,63 +184,110 @@ namespace UnipayFormMaker
 			w14.Position = 0;
 			w14.Fill = false;
 			w14.Padding = ((uint)(2));
-			// Container child hbox2.Gtk.Box+BoxChild
-			this.textFieldListCombo = global::Gtk.ComboBox.NewText ();
-			this.textFieldListCombo.TooltipMarkup = "Список вводимых полей";
-			this.textFieldListCombo.Name = "textFieldListCombo";
-			this.hbox2.Add (this.textFieldListCombo);
-			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.textFieldListCombo]));
-			w15.Position = 1;
-			// Container child hbox2.Gtk.Box+BoxChild
-			this.textFieldButton = new global::Gtk.Button ();
-			this.textFieldButton.CanFocus = true;
-			this.textFieldButton.Name = "textFieldButton";
-			this.textFieldButton.UseUnderline = true;
-			this.textFieldButton.Label = global::Mono.Unix.Catalog.GetString ("Подробнее");
-			this.hbox2.Add (this.textFieldButton);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.textFieldButton]));
-			w16.Position = 2;
-			w16.Fill = false;
 			this.vbox3.Add (this.hbox2);
-			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.hbox2]));
-			w17.Position = 3;
-			w17.Expand = false;
-			w17.Fill = false;
+			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.hbox2]));
+			w15.Position = 3;
+			w15.Expand = false;
+			w15.Fill = false;
+			// Container child vbox3.Gtk.Box+BoxChild
+			this.GtkScrolledWindow2 = new global::Gtk.ScrolledWindow ();
+			this.GtkScrolledWindow2.Name = "GtkScrolledWindow2";
+			this.GtkScrolledWindow2.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child GtkScrolledWindow2.Gtk.Container+ContainerChild
+			this.pagesNodeView = new global::Gtk.NodeView ();
+			this.pagesNodeView.CanFocus = true;
+			this.pagesNodeView.Name = "pagesNodeView";
+			this.GtkScrolledWindow2.Add (this.pagesNodeView);
+			this.vbox3.Add (this.GtkScrolledWindow2);
+			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.GtkScrolledWindow2]));
+			w17.Position = 4;
 			// Container child vbox3.Gtk.Box+BoxChild
 			this.hbox4 = new global::Gtk.HBox ();
 			this.hbox4.Name = "hbox4";
 			this.hbox4.Spacing = 6;
 			// Container child hbox4.Gtk.Box+BoxChild
-			this.GenerateButton = new global::Gtk.Button ();
-			this.GenerateButton.CanFocus = true;
-			this.GenerateButton.Name = "GenerateButton";
-			this.GenerateButton.UseUnderline = true;
-			// Container child GenerateButton.Gtk.Container+ContainerChild
+			this.newPageButton = new global::Gtk.Button ();
+			this.newPageButton.CanFocus = true;
+			this.newPageButton.Name = "newPageButton";
+			this.newPageButton.UseUnderline = true;
+			// Container child newPageButton.Gtk.Container+ContainerChild
 			global::Gtk.Alignment w18 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
 			// Container child GtkAlignment.Gtk.Container+ContainerChild
 			global::Gtk.HBox w19 = new global::Gtk.HBox ();
 			w19.Spacing = 2;
 			// Container child GtkHBox.Gtk.Container+ContainerChild
 			global::Gtk.Image w20 = new global::Gtk.Image ();
-			w20.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-execute", global::Gtk.IconSize.Menu);
+			w20.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
 			w19.Add (w20);
 			// Container child GtkHBox.Gtk.Container+ContainerChild
 			global::Gtk.Label w22 = new global::Gtk.Label ();
-			w22.LabelProp = global::Mono.Unix.Catalog.GetString ("Сгенерировать");
+			w22.LabelProp = global::Mono.Unix.Catalog.GetString ("Новая страница");
 			w22.UseUnderline = true;
 			w19.Add (w22);
 			w18.Add (w19);
-			this.GenerateButton.Add (w18);
-			this.hbox4.Add (this.GenerateButton);
-			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.GenerateButton]));
+			this.newPageButton.Add (w18);
+			this.hbox4.Add (this.newPageButton);
+			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.newPageButton]));
 			w26.Position = 0;
+			w26.Expand = false;
 			w26.Fill = false;
+			// Container child hbox4.Gtk.Box+BoxChild
+			this.textFieldButton = new global::Gtk.Button ();
+			this.textFieldButton.CanFocus = true;
+			this.textFieldButton.Name = "textFieldButton";
+			this.textFieldButton.UseUnderline = true;
+			// Container child textFieldButton.Gtk.Container+ContainerChild
+			global::Gtk.Alignment w27 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
+			// Container child GtkAlignment.Gtk.Container+ContainerChild
+			global::Gtk.HBox w28 = new global::Gtk.HBox ();
+			w28.Spacing = 2;
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Image w29 = new global::Gtk.Image ();
+			w29.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-edit", global::Gtk.IconSize.Menu);
+			w28.Add (w29);
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Label w31 = new global::Gtk.Label ();
+			w31.LabelProp = global::Mono.Unix.Catalog.GetString ("Редактировать страницу");
+			w31.UseUnderline = true;
+			w28.Add (w31);
+			w27.Add (w28);
+			this.textFieldButton.Add (w27);
+			this.hbox4.Add (this.textFieldButton);
+			global::Gtk.Box.BoxChild w35 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.textFieldButton]));
+			w35.Position = 1;
+			w35.Expand = false;
+			w35.Fill = false;
+			// Container child hbox4.Gtk.Box+BoxChild
+			this.GenerateButton = new global::Gtk.Button ();
+			this.GenerateButton.CanFocus = true;
+			this.GenerateButton.Name = "GenerateButton";
+			this.GenerateButton.UseUnderline = true;
+			// Container child GenerateButton.Gtk.Container+ContainerChild
+			global::Gtk.Alignment w36 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
+			// Container child GtkAlignment.Gtk.Container+ContainerChild
+			global::Gtk.HBox w37 = new global::Gtk.HBox ();
+			w37.Spacing = 2;
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Image w38 = new global::Gtk.Image ();
+			w38.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-execute", global::Gtk.IconSize.Menu);
+			w37.Add (w38);
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Label w40 = new global::Gtk.Label ();
+			w40.LabelProp = global::Mono.Unix.Catalog.GetString ("Сгенерировать");
+			w40.UseUnderline = true;
+			w37.Add (w40);
+			w36.Add (w37);
+			this.GenerateButton.Add (w36);
+			this.hbox4.Add (this.GenerateButton);
+			global::Gtk.Box.BoxChild w44 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.GenerateButton]));
+			w44.Position = 2;
+			w44.Fill = false;
 			this.vbox3.Add (this.hbox4);
-			global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.hbox4]));
-			w27.PackType = ((global::Gtk.PackType)(1));
-			w27.Position = 5;
-			w27.Expand = false;
-			w27.Fill = false;
+			global::Gtk.Box.BoxChild w45 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.hbox4]));
+			w45.PackType = ((global::Gtk.PackType)(1));
+			w45.Position = 5;
+			w45.Expand = false;
+			w45.Fill = false;
 			this.notebook1.Add (this.vbox3);
 			// Notebook tab
 			this.label1 = new global::Gtk.Label ();
@@ -275,8 +324,8 @@ namespace UnipayFormMaker
 			this.GtkLabel6.UseMarkup = true;
 			this.frame2.LabelWidget = this.GtkLabel6;
 			this.vbox4.Add (this.frame2);
-			global::Gtk.Box.BoxChild w32 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame2]));
-			w32.Position = 0;
+			global::Gtk.Box.BoxChild w50 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame2]));
+			w50.Position = 0;
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.alignment2 = new global::Gtk.Alignment (0.5F, 0.5F, 0.1F, 1F);
 			this.alignment2.Name = "alignment2";
@@ -286,30 +335,30 @@ namespace UnipayFormMaker
 			this.convertButton.Name = "convertButton";
 			this.convertButton.UseUnderline = true;
 			// Container child convertButton.Gtk.Container+ContainerChild
-			global::Gtk.Alignment w33 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
+			global::Gtk.Alignment w51 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
 			// Container child GtkAlignment.Gtk.Container+ContainerChild
-			global::Gtk.HBox w34 = new global::Gtk.HBox ();
-			w34.Spacing = 2;
+			global::Gtk.HBox w52 = new global::Gtk.HBox ();
+			w52.Spacing = 2;
 			// Container child GtkHBox.Gtk.Container+ContainerChild
-			global::Gtk.Image w35 = new global::Gtk.Image ();
-			w35.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-goto-bottom", global::Gtk.IconSize.Menu);
-			w34.Add (w35);
+			global::Gtk.Image w53 = new global::Gtk.Image ();
+			w53.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-goto-bottom", global::Gtk.IconSize.Menu);
+			w52.Add (w53);
 			// Container child GtkHBox.Gtk.Container+ContainerChild
-			global::Gtk.Label w37 = new global::Gtk.Label ();
-			w37.LabelProp = global::Mono.Unix.Catalog.GetString ("Конвертировать");
-			w37.UseUnderline = true;
-			w34.Add (w37);
-			w33.Add (w34);
-			this.convertButton.Add (w33);
+			global::Gtk.Label w55 = new global::Gtk.Label ();
+			w55.LabelProp = global::Mono.Unix.Catalog.GetString ("Конвертировать");
+			w55.UseUnderline = true;
+			w52.Add (w55);
+			w51.Add (w52);
+			this.convertButton.Add (w51);
 			this.alignment2.Add (this.convertButton);
 			this.vbox4.Add (this.alignment2);
-			global::Gtk.Box.BoxChild w42 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.alignment2]));
-			w42.Position = 1;
-			w42.Expand = false;
-			w42.Fill = false;
+			global::Gtk.Box.BoxChild w60 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.alignment2]));
+			w60.Position = 1;
+			w60.Expand = false;
+			w60.Fill = false;
 			this.notebook1.Add (this.vbox4);
-			global::Gtk.Notebook.NotebookChild w43 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1 [this.vbox4]));
-			w43.Position = 1;
+			global::Gtk.Notebook.NotebookChild w61 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1 [this.vbox4]));
+			w61.Position = 1;
 			// Notebook tab
 			this.label2 = new global::Gtk.Label ();
 			this.label2.Name = "label2";
@@ -317,8 +366,8 @@ namespace UnipayFormMaker
 			this.notebook1.SetTabLabel (this.vbox4, this.label2);
 			this.label2.ShowAll ();
 			this.vbox2.Add (this.notebook1);
-			global::Gtk.Box.BoxChild w44 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.notebook1]));
-			w44.Position = 0;
+			global::Gtk.Box.BoxChild w62 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.notebook1]));
+			w62.Position = 0;
 			// Container child vbox2.Gtk.Box+BoxChild
 			this.frame1 = new global::Gtk.Frame ();
 			this.frame1.Name = "frame1";
@@ -345,17 +394,17 @@ namespace UnipayFormMaker
 			this.GtkLabel7.UseMarkup = true;
 			this.frame1.LabelWidget = this.GtkLabel7;
 			this.vbox2.Add (this.frame1);
-			global::Gtk.Box.BoxChild w48 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.frame1]));
-			w48.Position = 1;
+			global::Gtk.Box.BoxChild w66 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.frame1]));
+			w66.Position = 1;
 			w1.Add (this.vbox2);
-			global::Gtk.Box.BoxChild w49 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
-			w49.Position = 0;
+			global::Gtk.Box.BoxChild w67 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
+			w67.Position = 0;
 			// Internal child UnipayFormMaker.FormDialog.ActionArea
-			global::Gtk.HButtonBox w50 = this.ActionArea;
-			w50.Name = "dialog1_ActionArea";
-			w50.Spacing = 10;
-			w50.BorderWidth = ((uint)(5));
-			w50.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w68 = this.ActionArea;
+			w68.Name = "dialog1_ActionArea";
+			w68.Spacing = 10;
+			w68.BorderWidth = ((uint)(5));
+			w68.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -365,9 +414,9 @@ namespace UnipayFormMaker
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
 			this.AddActionWidget (this.buttonOk, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w51 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w50 [this.buttonOk]));
-			w51.Expand = false;
-			w51.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w69 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w68 [this.buttonOk]));
+			w69.Expand = false;
+			w69.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
@@ -375,9 +424,8 @@ namespace UnipayFormMaker
 			this.DefaultHeight = 520;
 			this.Show ();
 			this.formIdEntry.Changed += new global::System.EventHandler (this.OnFormIdEntryChanged);
-			this.formNameText.Changed += new global::System.EventHandler (this.OnFormNameTextChanged);
 			this.paymentTypeButton.Clicked += new global::System.EventHandler (this.OnPaymentTypeButtonClicked);
-			this.textFieldListCombo.Changed += new global::System.EventHandler (this.OnTextFieldListComboChanged);
+			this.newPageButton.Clicked += new global::System.EventHandler (this.OnNewPageButtonClicked);
 			this.textFieldButton.Clicked += new global::System.EventHandler (this.OnTextFieldButtonClicked);
 			this.GenerateButton.Clicked += new global::System.EventHandler (this.OnGenerateButtonClicked);
 			this.convertButton.Clicked += new global::System.EventHandler (this.OnConvertButtonClicked);
